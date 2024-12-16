@@ -1,0 +1,7 @@
+INDEX VERSION 1.4+C:\Users\Elogio.mi\Downloads\프로젝트\ClassAssistSystem\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+2524841557.index
+118785127.index
+3251318840.index
+1483290936.index
+2158938453.index
+1910895491.index
