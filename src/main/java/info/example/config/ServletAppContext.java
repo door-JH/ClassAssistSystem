@@ -2,6 +2,7 @@ package info.example.config;
 
 import info.example.interceptor.TopMenuInterceptor;
 import info.example.mapper.ClassInfoMapper;
+import info.example.mapper.ClassMenuMapper;
 import info.example.mapper.TopMenuMapper;
 import info.example.service.TopMenuService;
 import org.apache.commons.dbcp2.BasicDataSource;
@@ -88,6 +89,12 @@ public class ServletAppContext implements WebMvcConfigurer {
         return factoryBean;
     }
 
-
+    @Bean
+    public MapperFactoryBean<ClassMenuMapper> getClassMenuMapper(SqlSessionFactory factory) throws Exception {
+        MapperFactoryBean<ClassMenuMapper> factoryBean =
+                new MapperFactoryBean<ClassMenuMapper>(ClassMenuMapper.class);
+        factoryBean.setSqlSessionFactory(factory);
+        return factoryBean;
+    }
 
 }
