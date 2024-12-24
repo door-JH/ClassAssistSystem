@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface TopMenuMapper {
     @Select(
-            "select CLASS_INFO_IDX, CLASS_INFO_NAME from CLASS_INFO_TABLE order by CLASS_INFO_IDX"
+            "select class_info_idx, class_info_name from class_info_table order by class_info_idx"
     )
     List<ClassInfoBean> getTopMenuList();
 }

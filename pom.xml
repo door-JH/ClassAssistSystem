@@ -5,12 +5,14 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   <dependencies>
-  <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
-	<dependency>
-    	<groupId>org.springframework</groupId>
-    	<artifactId>spring-jdbc</artifactId>
-    	<version>6.2.0</version>
-	</dependency>
+
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-jdbc</artifactId>
+    <version>5.2.6.RELEASE</version>
+</dependency>
+
 	
 	<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
 	<dependency>
@@ -32,11 +34,13 @@
     	<artifactId>mariadb-java-client</artifactId>
     	<version>3.3.3</version>
 	</dependency>
+
       <dependency>
           <groupId>org.springframework</groupId>
           <artifactId>spring-webmvc</artifactId>
           <version>5.2.6.RELEASE</version>
       </dependency>
+
       <dependency>
           <groupId>org.apache.commons</groupId>
           <artifactId>commons-dbcp2</artifactId>
@@ -69,7 +73,7 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
         <configuration>
-          <release>17</release>
+          <release>11</release>
         </configuration>
       </plugin>
       <plugin>

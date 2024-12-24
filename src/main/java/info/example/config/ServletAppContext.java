@@ -1,10 +1,7 @@
 package info.example.config;
 
-import info.example.interceptor.TopMenuInterceptor;
-import info.example.mapper.ClassInfoMapper;
-import info.example.mapper.ClassMenuMapper;
-import info.example.mapper.TopMenuMapper;
-import info.example.service.TopMenuService;
+import javax.sql.DataSource;
+
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -15,13 +12,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import javax.sql.DataSource;
+import info.example.interceptor.TopMenuInterceptor;
+import info.example.mapper.ClassInfoMapper;
+import info.example.mapper.ClassMenuMapper;
+import info.example.mapper.TopMenuMapper;
+import info.example.service.TopMenuService;
 
+@EnableWebMvc
 @Configuration
 @ComponentScan("info.example.controller")
 @ComponentScan("info.example.dao")
@@ -35,7 +37,7 @@ public class ServletAppContext implements WebMvcConfigurer {
     @Value("${database.url}")
     private String db_url;
 
-    @Value("${database.username")
+    @Value("${database.username}")
     private String db_username;
 
     @Value("${database.password}")
@@ -96,5 +98,8 @@ public class ServletAppContext implements WebMvcConfigurer {
         factoryBean.setSqlSessionFactory(factory);
         return factoryBean;
     }
+    
+
+    
 
 }
