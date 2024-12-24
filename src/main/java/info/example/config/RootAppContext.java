@@ -7,7 +7,6 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 // 프로젝트 작업시 사용할 bean을 정의하는 클래스
 @Configuration
-@ComponentScan(basePackages = "info.example")
 public class RootAppContext {
 	@Bean
     public InternalResourceViewResolver viewResolver() {

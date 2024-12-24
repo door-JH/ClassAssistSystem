@@ -15,6 +15,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import info.example.interceptor.TopMenuInterceptor;
@@ -29,6 +30,7 @@ import info.example.service.TopMenuService;
 @ComponentScan("info.example.dao")
 @ComponentScan("info.example.service")
 @PropertySource("/WEB-INF/properties/db.properties")
+
 public class ServletAppContext implements WebMvcConfigurer {
 
     @Value("${database.classname}")
@@ -98,8 +100,14 @@ public class ServletAppContext implements WebMvcConfigurer {
         factoryBean.setSqlSessionFactory(factory);
         return factoryBean;
     }
-    
 
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+	    registry.addResourceHandler("/image/**")
+	    		.addResourceLocations("/image/");
+	}
+    
+    
     
 
 }

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var='root' value="${pageContext.request.contextPath}"/>
+<c:set var='root' value="${pageContext.request.contextPath}/"/>
 <html>
 <head>
     <title>Title</title>
@@ -30,7 +30,7 @@ text-align: center; margin-top:100px;margin-bottom:25px; ">
                     </tr>
                 </c:forEach>
                 <tr>
-                    <th><a href="#"><img src="${root }image/subject_${class_info_idx }.jpg" width="213"
+                    <th><a href="#"><img src="${root}image/subject/${class_info_idx}.png" width="213"
                                          height="142"/></a></th>
                 </tr>
                 </tbody>
@@ -50,7 +50,7 @@ text-align: center; margin-top:100px;margin-bottom:25px; ">
             </table>
             <c:if test="${loginStudentBean.student_idx == 1 }">
                 <div class="text-right">
-                    <a href="${root }class/write?class_info_idx=${class_info_idx}&class_menu_idx=${class_menu_idx}\"
+                    <a href="${root}class/write?class_info_idx=${class_info_idx}&class_menu_idx=${class_menu_idx}\"
                        class="btn btn-primary">자료올리기</a>
                 </div>
             </c:if>
