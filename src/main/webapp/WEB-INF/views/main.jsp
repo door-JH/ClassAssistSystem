@@ -21,10 +21,9 @@
 <div class="container" style="margin-top:100px">
 	<div class="row">
 		<c:forEach var="obj" items="${topMenuList}">
-			<div class="col-xs-3" style="padding-right: 5px; padding-left: 0px;
-					margin-right: auto; margin-left: auto;">
+			<div class="col-xs-3">
 				<a href="${root}/class/main?class_info_idx=${obj.class_info_idx}">
-					<img src="image/subject/${obj.class_info_idx}.jpg" width="213px" height="142px">
+					<img src="image/subject/${obj.class_info_idx}.jpg" style="width: 100%; display: block;">
 				</a>
 				<br/>
 				<a href="${root}/class/main?class_info_idx=${obj.class_info_idx}"

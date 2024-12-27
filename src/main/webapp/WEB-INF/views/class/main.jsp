@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var='root' value="${pageContext.request.contextPath}/"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 <html>
 <head>
     <title>Title</title>
@@ -15,8 +19,8 @@ text-align: center; margin-top:100px;margin-bottom:25px; ">
     </div>
     <div class="row">
         <!-- 왼쪽 메뉴 리스트 -->
-        <div class='col-sm-3' style="padding-left: 05px;padding-right:05px; margin-left:auto; margin-right:auto;">
-            <table class="table table-hover board_list">
+        <div class='col-sm-3'>
+            <table class="table table-hover board_list" style="text-align: center;">
                 <thead>
                 <tr>
                     <th class="text-center d-none d-md-table-cell">메뉴</th>
@@ -30,8 +34,8 @@ text-align: center; margin-top:100px;margin-bottom:25px; ">
                     </tr>
                 </c:forEach>
                 <tr>
-                    <th><a href="#"><img src="${root}image/subject/${class_info_idx}.png" width="213"
-                                         height="142"/></a></th>
+                    <th><a href="#"><img src="${root}image/subject/${class_info_idx}.jpg"
+                    							style="display: block; width:100%;"/></a></th>
                 </tr>
                 </tbody>
             </table>
