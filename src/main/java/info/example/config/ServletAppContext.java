@@ -19,6 +19,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import info.example.interceptor.TopMenuInterceptor;
+import info.example.mapper.AssistContentsMapper;
 import info.example.mapper.ClassInfoMapper;
 import info.example.mapper.ClassMenuMapper;
 import info.example.mapper.TopMenuMapper;
@@ -97,6 +98,14 @@ public class ServletAppContext implements WebMvcConfigurer {
     public MapperFactoryBean<ClassMenuMapper> getClassMenuMapper(SqlSessionFactory factory) throws Exception {
         MapperFactoryBean<ClassMenuMapper> factoryBean =
                 new MapperFactoryBean<ClassMenuMapper>(ClassMenuMapper.class);
+        factoryBean.setSqlSessionFactory(factory);
+        return factoryBean;
+    }
+    
+    @Bean
+    public MapperFactoryBean<AssistContentsMapper> getAssistContentsMapper(SqlSessionFactory factory) throws Exception {
+        MapperFactoryBean<AssistContentsMapper> factoryBean =
+                new MapperFactoryBean<AssistContentsMapper>(AssistContentsMapper.class);
         factoryBean.setSqlSessionFactory(factory);
         return factoryBean;
     }

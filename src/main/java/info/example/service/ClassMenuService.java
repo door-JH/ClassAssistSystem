@@ -10,14 +10,14 @@ import java.util.List;
 @Service
 public class ClassMenuService {
 
-    @Autowired
-    private ClassMenuDAO classMenuDAO;
-
-    public String getClassMenuName(int class_menu_idx){
-        return classMenuDAO.getClassMenuName(class_menu_idx);
-    }
-
-    public List<ClassMenuBean> getClassMenuList(){
-        return classMenuDAO.getClassMenuList();
-    }
+	@Autowired
+	private ClassMenuDAO classMenuDAO;
+	
+	public String getClassMenuName(int class_menu_idx) {
+		return classMenuDAO.getClassMenuName(class_menu_idx);
+	}
+	
+	public List<ClassMenuBean> getClassMenuList(){
+		return classMenuDAO.getClassMenuList();
+	}
 }
