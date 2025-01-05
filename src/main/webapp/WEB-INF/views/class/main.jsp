@@ -40,6 +40,7 @@ text-align: center; margin-top:100px;margin-bottom:25px; ">
                 </tbody>
             </table>
         </div>
+        
         <!-- 오른쪽 글 리스트 -->
         <div class='col-sm-9' style="padding-right: 05px; padding-left: 0px; margin-right: auto; margin-left: auto;">
             <table class="table table-hover board_list">
@@ -51,6 +52,20 @@ text-align: center; margin-top:100px;margin-bottom:25px; ">
                     <th class="text-center d-none d-md-table-cell">작성날짜</th>
                 </tr>
                 </thead>
+                <tbody>
+                	<c:forEach var='obj' items="${assistContentsList}">
+                	<tr>
+                		<td class="text-center d-none d-md-table-cell"> ${obj.assist_contents_idx}</td>
+                		<td> <a href ='${root}class/read?class_info_idx=${class_info_idx}
+                		&assist_contents_idx=${obj.assist_contents_idx}&class_menu_idx=${class_menu_idx}'>
+       						${obj.assist_contents_title}</a></td>
+                		<td class="text-center d-none d-md-table-cell">${obj.assist_contents_writer_name}</td>
+                		<td class="text-center d-none d-md-table-cell">${obj.assist_contents_date} </td>
+                	</tr>
+                	</c:forEach>
+                	<tr><td></td><td></td><td></td><td></td></tr>
+                </tbody>
+                
             </table>
             <c:if test="${loginStudentBean.student_idx == 1 }">
                 <div class="text-right">

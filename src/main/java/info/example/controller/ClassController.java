@@ -45,7 +45,7 @@ public class ClassController {
         model.addAttribute("classMenuList", classMenuList);
         
         AssistContentsBean assistContentsBean = new AssistContentsBean();
-        assistContentsBean.setAssist_contents_idx(0);
+        //assistContentsBean.setAssist_contents_idx(0);
         assistContentsBean.setAssist_contents_info_idx(class_info_idx);
         assistContentsBean.setAssist_contents_title("테스트 컨텐츠 제목");
         assistContentsBean.setAssist_contents_text("테스트 컨텐츠 내용 입니다");
