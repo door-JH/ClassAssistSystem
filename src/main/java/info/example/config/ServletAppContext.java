@@ -20,6 +20,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import info.example.interceptor.TopMenuInterceptor;
 import info.example.mapper.AssistContentsMapper;
+import info.example.mapper.AssistDataMapper;
 import info.example.mapper.ClassInfoMapper;
 import info.example.mapper.ClassMenuMapper;
 import info.example.mapper.TopMenuMapper;
@@ -109,7 +110,15 @@ public class ServletAppContext implements WebMvcConfigurer {
         factoryBean.setSqlSessionFactory(factory);
         return factoryBean;
     }
-
+    
+    @Bean
+    public MapperFactoryBean<AssistDataMapper> getAssistDataMapper(SqlSessionFactory factory) throws Exception {
+        MapperFactoryBean<AssistDataMapper> factoryBean =
+                new MapperFactoryBean<AssistDataMapper>(AssistDataMapper.class);
+        factoryBean.setSqlSessionFactory(factory);
+        return factoryBean;
+    }
+    
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 	    registry.addResourceHandler("/image/**")

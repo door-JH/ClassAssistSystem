@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 import info.example.beans.AssistContentsBean;
+import info.example.beans.AssistDataBean;
 
 public interface AssistContentsMapper {
 	
@@ -26,4 +27,13 @@ public interface AssistContentsMapper {
 			+ "and a1.assist_contents_info_idx = #{class_info_idx} "
 			+ "order by a1.assist_contents_idx desc")
 	List<AssistContentsBean> getAssistContentsList(int class_info_idx);
+	
+	@Select("Select "
+			+ "a2.student_name as assist_contents_writer_name, a1.assist_contents_date, "
+			+ "a1.assist_contents_title, a1.assist_contents_text, a1.assist_contents_writer_idx "
+			+ "from assist_contents_table a1, student_table a2 "
+			+ "where a1.assist_contents_writer_idx = a2.student_idx and "
+			+ "assist_contents_idx = #{assist_contents_idx}")
+	AssistContentsBean getAssistContentsInfo(int assist_contents_idx);
+	
 }

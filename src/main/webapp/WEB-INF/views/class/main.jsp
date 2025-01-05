@@ -29,8 +29,7 @@ text-align: center; margin-top:100px;margin-bottom:25px; ">
                 <tbody>
                 <c:forEach var='obj' items="${classMenuList }">
                     <tr>
-                        <th><a class="nav-link" href='${root }class/main?class_info_idx=${class_info_idx}
-                                &class_menu_idx=${obj.class_menu_idx}'>${obj.class_menu_name }</a></th>
+                        <th><a class="nav-link" href='${root }class/main?class_info_idx=${class_info_idx}&class_menu_idx=${obj.class_menu_idx}'>${obj.class_menu_name }</a></th>
                     </tr>
                 </c:forEach>
                 <tr>

@@ -24,4 +24,9 @@ public class AssistContentsDAO {
 	public List<AssistContentsBean> getAssistContentsList(int class_info_idx){
 		return assistContentsMapper.getAssistContentsList(class_info_idx);
 	}
+	
+	public AssistContentsBean getAssistContentsInfo(int assist_contents_idx) {
+		return assistContentsMapper.getAssistContentsInfo(assist_contents_idx);
+	}
+	
 }

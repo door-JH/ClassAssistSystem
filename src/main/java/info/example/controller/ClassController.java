@@ -1,6 +1,7 @@
 package info.example.controller;
 
 import info.example.beans.AssistContentsBean;
+import info.example.beans.AssistDataBean;
 import info.example.beans.ClassMenuBean;
 import info.example.service.AssistContentsService;
 import info.example.service.ClassMenuService;
@@ -44,17 +45,38 @@ public class ClassController {
         List<ClassMenuBean> classMenuList = classMenuService.getClassMenuList();
         model.addAttribute("classMenuList", classMenuList);
         
-        AssistContentsBean assistContentsBean = new AssistContentsBean();
-        //assistContentsBean.setAssist_contents_idx(0);
-        assistContentsBean.setAssist_contents_info_idx(class_info_idx);
-        assistContentsBean.setAssist_contents_title("테스트 컨텐츠 제목");
-        assistContentsBean.setAssist_contents_text("테스트 컨텐츠 내용 입니다");
-        assistContentsBean.setAssist_contents_writer_idx(1);
-        assistcontentsservice.addAssistContentsInfo(assistContentsBean);
-        
         List<AssistContentsBean> assistContentsList = assistcontentsservice.getAssistContentsList(class_info_idx);
         model.addAttribute("assistContentsList", assistContentsList);
         
         return "class/main";
     }
+    
+    @GetMapping("/read")
+    public String read(
+    					@RequestParam("class_info_idx") int class_info_idx,
+    					@RequestParam("class_menu_idx") int class_menu_idx,
+    					@RequestParam("assist_contents_idx") int assist_contents_idx,
+    					Model model) {
+    	
+    	model.addAttribute("class_info_idx", class_info_idx);
+    	model.addAttribute("class_menu_idx", class_menu_idx);
+    	model.addAttribute("assist_contents_idx", assist_contents_idx);
+    	//model.addAttribute("loginUserBean", loginUserBean);
+    	
+    	String classInfoName = classService.getClassInfoName(class_info_idx);
+    	model.addAttribute("classInfoName", classInfoName);
+    	
+    	String classMenuName = classMenuService.getClassMenuName(class_menu_idx);
+    	model.addAttribute("classMenuName", classMenuName);
+    	
+    	AssistContentsBean readAssistContentsBean = classService.getAssistContentsInfo(assist_contents_idx);
+    	model.addAttribute("readAssistContentsBean", readAssistContentsBean);
+    	
+    	List<AssistDataBean> readAssistDataList = classService.getAssistDataList(assist_contents_idx);
+    	model.addAttribute("readAssistDataList", readAssistDataList);
+    	
+    		
+    	return "class/read";
+    }
+    
 }
