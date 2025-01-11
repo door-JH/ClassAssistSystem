@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -25,6 +26,7 @@ import info.example.mapper.ClassInfoMapper;
 import info.example.mapper.ClassMenuMapper;
 import info.example.mapper.TopMenuMapper;
 import info.example.service.TopMenuService;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 
 @EnableWebMvc
 @Configuration
@@ -77,8 +79,19 @@ public class ServletAppContext implements WebMvcConfigurer {
         SqlSessionFactory factory = factoryBean.getObject();
         return factory;
     }
-
-
+    
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer PropertySourcesPlaceholderConfigurer() {
+    	return new PropertySourcesPlaceholderConfigurer();
+    }
+    
+    @Bean
+    public ReloadableResourceBundleMessageSource messageSource() {
+    	ReloadableResourceBundleMessageSource res = new ReloadableResourceBundleMessageSource();
+    	res.setBasename("/WEB-INF/properties/error_message");
+    	return res;
+    }
+    
     @Bean
     public MapperFactoryBean<ClassInfoMapper> getBoardMapper(SqlSessionFactory factory) throws Exception {
         MapperFactoryBean<ClassInfoMapper> factoryBean =

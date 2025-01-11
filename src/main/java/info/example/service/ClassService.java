@@ -2,6 +2,7 @@ package info.example.service;
 
 import info.example.beans.AssistContentsBean;
 import info.example.beans.AssistDataBean;
+import info.example.beans.ClassInfoBean;
 import info.example.dao.AssistContentsDAO;
 import info.example.dao.AssistDataDAO;
 import info.example.dao.ClassInfoDAO;
@@ -33,5 +34,9 @@ public class ClassService {
     
     public List<AssistDataBean> getAssistDataList(int assist_contents_idx){
     	return assistDataDAO.getAssistDataList(assist_contents_idx);
+    }
+    
+    public ClassInfoBean getClassInfoDetail(int contents_info_idx) {
+    	return classInfoDAO.getClassInfoDetail(contents_info_idx);
     }
 }
