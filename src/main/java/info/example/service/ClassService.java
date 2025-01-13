@@ -3,11 +3,14 @@ package info.example.service;
 import info.example.beans.AssistContentsBean;
 import info.example.beans.AssistDataBean;
 import info.example.beans.ClassInfoBean;
+import info.example.beans.StudentBean;
 import info.example.dao.AssistContentsDAO;
 import info.example.dao.AssistDataDAO;
 import info.example.dao.ClassInfoDAO;
 
 import java.util.List;
+
+import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,5 +41,11 @@ public class ClassService {
     
     public ClassInfoBean getClassInfoDetail(int contents_info_idx) {
     	return classInfoDAO.getClassInfoDetail(contents_info_idx);
+    }
+    
+    public void addAssistContentsInfo(AssistContentsBean writeAssistContentsBean) {
+    	writeAssistContentsBean.setAssist_contents_writer_idx(loginStudentBean.getStudent_idx());
+    	
+    	assistContentsDAO.addAssistContentsInfo(writeAssistContentsBean);
     }
 }

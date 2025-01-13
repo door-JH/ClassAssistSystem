@@ -16,9 +16,9 @@ public class AssistContentsDAO {
 	
 	public void addAssistContentsInfo(AssistContentsBean writeAssistContentsBean) {
 		
-		for(int i=0; i < 100; i++) {
+		//for(int i=0; i < 100; i++) {
 			assistContentsMapper.addAssistContentsInfo(writeAssistContentsBean);
-		}
+		//}
 	}
 	
 	public List<AssistContentsBean> getAssistContentsList(int class_info_idx){

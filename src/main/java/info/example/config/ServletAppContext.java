@@ -19,6 +19,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import info.example.beans.StudentBean;
 import info.example.interceptor.TopMenuInterceptor;
 import info.example.mapper.AssistContentsMapper;
 import info.example.mapper.AssistDataMapper;
@@ -137,8 +138,5 @@ public class ServletAppContext implements WebMvcConfigurer {
 	    registry.addResourceHandler("/image/**")
 	    		.addResourceLocations("/image/");
 	}
-    
-    
-    
-
+	
 }

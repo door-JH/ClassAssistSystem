@@ -50,6 +50,12 @@
 						</div>
 						
 						<div class="form-group">
+							<div class="form-group-append">
+								<button type ="button" class="btn btn-light" onclick='add_file()'>첨부파일 추가 </button>
+							</div>
+							<div id="d_file"></div>
+						</div>
+						<div class="form-group">
 							<div class="text-right">
 							<a href="${root}board/main?class_info_idx=${class_info_idx}&page=${page}&class_menu_idx=${class_menu_idx}"
 							class ="btn btn-primary">취소하기</a>

@@ -17,4 +17,8 @@ public class AssistDataDAO {
 	public List<AssistDataBean> getAssistDataList(int assist_contents_idx){
 		return assistDataMapper.getAssistDataList(assist_contents_idx);
 	}
+	
+	public void addAssistDataInfo(AssistDataBean writeAssistDataBean) {
+		assistDataMapper.addAssistDataInfo(writeAssistDataBean);
+	}
 }

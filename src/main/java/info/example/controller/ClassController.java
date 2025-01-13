@@ -6,6 +6,7 @@ import info.example.beans.ClassInfoBean;
 import info.example.beans.ClassMenuBean;
 import info.example.beans.StudentBean;
 import info.example.service.AssistContentsService;
+import info.example.service.AssistDataService;
 import info.example.service.ClassMenuService;
 import info.example.service.ClassService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class ClassController {
     private AssistContentsService assistcontentsservice;
     
     @Autowired
-    private StudentBean loginUserBean;
+    private AssistDataService assistDataService;
     
     @GetMapping("/main")
     public String main(@RequestParam("class_info_idx") int class_info_idx,
@@ -157,7 +158,7 @@ public class ClassController {
     		writeAssistDataBean.setAssist_data_file(mFile);
     		writeAssistDataBean.setAssist_data_contents_idx(writeAssistContentsBean.getAssist_contents_idx());
     		
-    		//assistDataSerivce.addAssistdataInfo(writeAssistDataBean, column_name);
+    		assistDataService.addAssistDataInfo(writeAssistDataBean, column_name);
     	}
     	
     	
