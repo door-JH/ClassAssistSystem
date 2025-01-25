@@ -32,7 +32,6 @@ public class AssistDataService {
 			writeAssistDataBean.setAssist_data_filename(file_name);
 		}
 		
-
 		assistDataDAO.addAssistDataInfo(writeAssistDataBean);
 		
 	}
@@ -42,7 +41,7 @@ public class AssistDataService {
 	private String path_class_data_file_name;
 	private String saveUploaadFile(MultipartFile upload_file) {
 		
-		SimpleDateFormat sDate = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String file_name = column_name + "_" + sDate.format(new Date()) +
 							"_" + upload_file.getOriginalFilename();
 		path_class_data_file_name = path_class_data + "/" + file_name;
