@@ -10,7 +10,6 @@ import info.example.dao.ClassInfoDAO;
 
 import java.util.List;
 
-import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,7 +43,7 @@ public class ClassService {
     }
     
     public void addAssistContentsInfo(AssistContentsBean writeAssistContentsBean) {
-    	writeAssistContentsBean.setAssist_contents_writer_idx(loginStudentBean.getStudent_idx());
+    	//writeAssistContentsBean.setAssist_contents_writer_idx(loginStudentBean.getStudent_idx());
     	
     	assistContentsDAO.addAssistContentsInfo(writeAssistContentsBean);
     }
