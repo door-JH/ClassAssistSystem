@@ -3,5 +3,5 @@
 <c:set var='root' value="${pageContext.request.contextPath}/"/>
 <script>
 	alert('저장되었습니다.');
-	location.href = '${root}board/read?class_info_idx=${writeContentBean.content_class_idx}&content_idx=${writeContentBean.content_idx}'
+	location.href = '${root}class/main?class_info_idx=${class_info_idx}&class_menu_idx=${class_menu_idx}'
 </script>

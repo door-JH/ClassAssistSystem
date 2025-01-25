@@ -156,13 +156,13 @@ public class ClassController {
     		AssistDataBean writeAssistDataBean = new AssistDataBean();
     		writeAssistDataBean.setAssist_data_filename(oName);
     		writeAssistDataBean.setAssist_data_file(mFile);
-    		writeAssistDataBean.setAssist_data_contents_idx(writeAssistContentsBean.getAssist_contents_idx());
+    		//writeAssistDataBean.setAssist_data_contents_idx(writeAssistContentsBean.getAssist_contents_idx());
     		
     		assistDataService.addAssistDataInfo(writeAssistDataBean, column_name);
     	}
     	
     	
-    	return "class/write_success";
+    	return "board/write_success";
     }
     
 }
