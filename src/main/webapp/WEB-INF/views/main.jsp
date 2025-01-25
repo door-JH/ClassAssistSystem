@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>iL</title>
+<title>Class Assist System</title>
 <!-- Bootstrap CDN -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -18,12 +18,12 @@
 <c:import url="/WEB-INF/views/include/top_menu.jsp"></c:import>
 
 <!-- Contents -->
-<div class="container" style="margin-top:100px">
+<div class="container text-center" style="margin-top:100px">
 	<div class="row">
 		<c:forEach var="obj" items="${topMenuList}">
-			<div class="col-xs-3">
-				<a href="${root}/class/main?class_info_idx=${obj.class_info_idx}">
-					<img src="image/subject/${obj.class_info_idx}.jpg" style="width: 100%; display: block;">
+			<div class="col">
+				<a href="${root}/class/main?class_info_idx=${obj.class_info_idx}&class_menu_idx=1">
+					<img src="image/subject/${obj.class_info_idx}.jpg" style="width: 50%">
 				</a>
 				<br/>
 				<a href="${root}/class/main?class_info_idx=${obj.class_info_idx}"

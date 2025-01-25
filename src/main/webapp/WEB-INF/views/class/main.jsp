@@ -66,12 +66,12 @@ text-align: center; margin-top:100px;margin-bottom:25px; ">
                 </tbody>
                 
             </table>
-            <c:if test="${loginStudentBean.student_idx == 1 }">
+<%--            <c:if test="${loginStudentBean.student_idx == 1 }">--%>
                 <div class="text-right">
-                    <a href="${root}class/write?class_info_idx=${class_info_idx}&class_menu_idx=${class_menu_idx}\"
+                    <a href="${root}class/write?class_info_idx=${class_info_idx}&class_menu_idx=${class_menu_idx}"
                        class="btn btn-primary">자료올리기</a>
                 </div>
-            </c:if>
+<%--            </c:if>--%>
         </div>
     </div>
 </div>
