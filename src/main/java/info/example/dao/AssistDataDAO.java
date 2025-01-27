@@ -21,4 +21,8 @@ public class AssistDataDAO {
 	public void addAssistDataInfo(AssistDataBean writeAssistDataBean) {
 		assistDataMapper.addAssistDataInfo(writeAssistDataBean);
 	}
+
+	public AssistDataBean getAssistDataInfo(AssistDataBean assistDataBean) {
+		return assistDataMapper.getAssistDataInfo(assistDataBean);
+	}
 }

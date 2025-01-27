@@ -3,7 +3,9 @@ package info.example.beans;
 import org.springframework.web.multipart.MultipartFile;
 
 public class AssistDataBean {
-	
+
+	private int assist_data_idx;
+
 	private String Assist_data_filename;
 	
 	private MultipartFile Assist_data_file;
@@ -33,7 +35,12 @@ public class AssistDataBean {
 	public void setAssist_data_contents_idx(int assist_data_contents_idx) {
 		Assist_data_contents_idx = assist_data_contents_idx;
 	}
-	
-	
-	
+
+	public int getAssist_data_idx() {
+		return assist_data_idx;
+	}
+
+	public void setAssist_data_idx(int assist_data_idx) {
+		this.assist_data_idx = assist_data_idx;
+	}
 }

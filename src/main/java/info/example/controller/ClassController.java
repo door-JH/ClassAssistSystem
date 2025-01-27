@@ -9,6 +9,8 @@ import info.example.service.AssistContentsService;
 import info.example.service.AssistDataService;
 import info.example.service.ClassMenuService;
 import info.example.service.ClassService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,17 +23,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/class")
 public class ClassController {
 
-    @Autowired
+	private static final Logger log = LoggerFactory.getLogger(ClassController.class);
+	@Autowired
     private ClassService classService;
 
     @Autowired
@@ -164,5 +174,56 @@ public class ClassController {
     	
     	return "board/write_success";
     }
-    
+
+	@GetMapping("/downlaod")
+	public void downlad(HttpServletRequest req, HttpServletResponse res,
+						@RequestParam("class_info_idx") int class_info_idx,
+						@RequestParam("class_menu_idx") int class_menu_idx,
+						@RequestParam("assist_contents_idx") int assist_contents_idx,
+						@RequestParam("assist_data_idx") int assist_data_idx, Model model) throws IOException {
+
+		model.addAttribute("class_info_idx", class_info_idx);
+		model.addAttribute("class_menu_idx", class_menu_idx);
+		model.addAttribute("assist_contents_idx", assist_contents_idx);
+		//model.addAttribute("loginUserBean", loginUserBean);
+
+		AssistDataBean tempAssistDataBean = new AssistDataBean();
+		tempAssistDataBean.setAssist_data_idx(assist_data_idx);
+		tempAssistDataBean.setAssist_data_contents_idx(assist_contents_idx);
+
+		AssistDataBean assistDataBean = assistDataService.addAssistDataInfo(tempAssistDataBean);
+
+		String fileName = assistDataBean.getAssist_data_filename();
+		log.info("Mapping - download {}",fileName);
+
+		//String pathClassData = assistDataService.getPathClassData();
+		//log.info("Mapping - download {}", pathClassData);
+
+		File f = new File(fileName);
+
+		fileName = URLEncoder.encode(fileName, "UTF-8");
+
+		res.setContentLength((int) f.length());
+		res.setContentType("application/octet-stream");
+		res.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
+		res.setHeader("Content-Transfer-Encoding", "binary");
+		res.setHeader("Pragma", "no-cache");
+		res.setHeader("Expires", "0");
+
+		FileInputStream in = new FileInputStream(f);
+		OutputStream out = res.getOutputStream();
+		byte[] buf = new byte[1024];
+		while(true){
+			int count = in.read(buf);
+			if(count == -1){
+				break;
+			}
+			out.write(buf, 0, count);
+		}
+		in.close();
+		out.close();
+
+		return; // ??? return 구문은 왜 넣는거야
+	}
+
 }

@@ -35,6 +35,11 @@ public class AssistDataService {
 		assistDataDAO.addAssistDataInfo(writeAssistDataBean);
 		
 	}
+
+	public AssistDataBean addAssistDataInfo(AssistDataBean assistDataBean) {
+		return assistDataDAO.getAssistDataInfo(assistDataBean);
+	}
+
 	
 	@Value("${path.class.data.win}")
 	private String path_class_data;
