@@ -46,7 +46,7 @@
 					value="${readAssistContentsBean.assist_contents_text}" disabled="disabled"/>
 				</div>
 				
-				<c:if test="${readAsssitDataList != null}">
+				<c:if test="${readAssistDataList != null}">
 					<div class="form-group">
 						<label for="board_file">첨부 파일: </label>
 						<c:forEach var='obj' items="${readAssistDataList}">
