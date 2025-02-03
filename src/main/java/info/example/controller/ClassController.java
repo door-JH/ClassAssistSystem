@@ -12,6 +12,7 @@ import info.example.service.ClassService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -52,7 +53,10 @@ public class ClassController {
     
     @Autowired
     private AssistDataService assistDataService;
-    
+
+	@Value("${path.class.data.win}")
+	private String path_class_data;
+
     @GetMapping("/main")
     public String main(@RequestParam("class_info_idx") int class_info_idx,
                        @RequestParam("class_menu_idx") int class_menu_idx, Model model) {
@@ -175,7 +179,7 @@ public class ClassController {
     	return "board/write_success";
     }
 
-	@GetMapping("/downlaod")
+	@GetMapping("/download")
 	public void downlad(HttpServletRequest req, HttpServletResponse res,
 						@RequestParam("class_info_idx") int class_info_idx,
 						@RequestParam("class_menu_idx") int class_menu_idx,
@@ -196,10 +200,10 @@ public class ClassController {
 		String fileName = assistDataBean.getAssist_data_filename();
 		log.info("Mapping - download {}",fileName);
 
-		//String pathClassData = assistDataService.getPathClassData();
-		//log.info("Mapping - download {}", pathClassData);
+		String pathClassData = path_class_data;
+		log.info("Mapping - download {}", pathClassData);
 
-		File f = new File(fileName);
+		File f = new File(pathClassData + "/" + fileName);
 
 		fileName = URLEncoder.encode(fileName, "UTF-8");
 
@@ -223,7 +227,6 @@ public class ClassController {
 		in.close();
 		out.close();
 
-		return; // ??? return 구문은 왜 넣는거야
 	}
 
 }
