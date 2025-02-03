@@ -28,5 +28,8 @@ public class AssistContentsDAO {
 	public AssistContentsBean getAssistContentsInfo(int assist_contents_idx) {
 		return assistContentsMapper.getAssistContentsInfo(assist_contents_idx);
 	}
-	
+
+	public void modifyAssistContentsInfo(AssistContentsBean modifyAssistContentsBean) {
+		assistContentsMapper.modifyAssistContentsInfo(modifyAssistContentsBean);
+	}
 }

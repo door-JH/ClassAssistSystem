@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Select;
 
 import info.example.beans.AssistContentsBean;
 import info.example.beans.AssistDataBean;
+import org.apache.ibatis.annotations.Update;
 
 public interface AssistContentsMapper {
 	
@@ -35,5 +36,10 @@ public interface AssistContentsMapper {
 			+ "where a1.assist_contents_writer_idx = a2.student_idx and "
 			+ "assist_contents_idx = #{assist_contents_idx}")
 	AssistContentsBean getAssistContentsInfo(int assist_contents_idx);
-	
+
+	@Update("update assist_contents_table"
+			+ "set asssit_contents_title = #{assist_contents_title}, assist_contents_text = #{assist_contents_text} "
+			+ "where assist_contents_idx = #{assist_contents_idx}")
+	void modifyAssistContentsInfo(AssistContentsBean modifyAssistContentsBean);
+
 }

@@ -229,4 +229,93 @@ public class ClassController {
 
 	}
 
+	@GetMapping("/modify")
+	public String modify(@RequestParam("class_info_idx") int class_info_idx,
+						 @RequestParam("class_menu_idx") int class_menu_idx,
+						 @RequestParam("assist_contents_idx") int assist_contents_idx,
+						 @ModelAttribute("modifyAssistContentsBean") AssistContentsBean modifyAssistContentsBean,
+						 Model model) {
+
+		model.addAttribute("class_info_idx", class_info_idx);
+		model.addAttribute("class_menu_idx", class_menu_idx);
+		model.addAttribute("assist_contents_idx", assist_contents_idx);
+
+		String classInfoName = classService.getClassInfoName(class_info_idx);
+		model.addAttribute("classInfoName", classInfoName);
+
+		String classMenuName = classMenuService.getClassMenuName(class_menu_idx);
+		model.addAttribute("classMenuName", classMenuName);
+
+		AssistContentsBean tempAssistContentsBean = classService.getAssistContentsInfo(assist_contents_idx);
+		modifyAssistContentsBean.setAssist_contents_writer_name(tempAssistContentsBean.getAssist_contents_writer_name());
+		modifyAssistContentsBean.setAssist_contents_date(tempAssistContentsBean.getAssist_contents_date());
+		modifyAssistContentsBean.setAssist_contents_title(tempAssistContentsBean.getAssist_contents_title());
+		modifyAssistContentsBean.setAssist_contents_text(tempAssistContentsBean.getAssist_contents_text());
+		modifyAssistContentsBean.setAssist_contents_writer_idx(tempAssistContentsBean.getAssist_contents_writer_idx());
+		modifyAssistContentsBean.setAssist_contents_info_idx(tempAssistContentsBean.getAssist_contents_info_idx());
+		modifyAssistContentsBean.setAssist_contents_idx(tempAssistContentsBean.getAssist_contents_idx());
+
+		List<AssistDataBean> readAssistDataList = classService.getAssistDataList(class_info_idx);
+		model.addAttribute("readAssistDataList", readAssistDataList);
+
+
+		return "class/modify";
+	}
+
+	@PostMapping("/modify_post")
+	public String modify_post(@Valid @ModelAttribute("modifyAssistContentsBean") AssistContentsBean modifyAssistContentsBean,
+							  MultipartHttpServletRequest multipartRequest, HttpServletRequest req,
+							  @RequestParam("class_menu_idx") int class_menu_idx,
+							  BindingResult result ,Model model) {
+
+		if(result.hasErrors()) {
+			return "class/modify";
+		}
+
+		classService.modifyAssistContentsInfo(modifyAssistContentsBean);
+
+		model.addAttribute("class_info_idx", modifyAssistContentsBean.getAssist_contents_info_idx());
+		model.addAttribute("class_menu_idx", class_menu_idx);
+		model.addAttribute("assist_contents_idx", modifyAssistContentsBean.getAssist_contents_idx());
+
+		String classInfoName = classService.getClassInfoName(modifyAssistContentsBean.getAssist_contents_info_idx());
+		model.addAttribute("classInfoName", classInfoName);
+
+		String classMenuName = classMenuService.getClassMenuName(modifyAssistContentsBean.getAssist_contents_info_idx());
+		model.addAttribute("classMenuName", classMenuName);
+
+		ClassInfoBean classInfoBean = classService.getClassInfoDetail(modifyAssistContentsBean.getAssist_contents_info_idx());
+
+		String column_name = classInfoBean.getClass_info_year() + "-" + classInfoBean.getClass_info_semester() + "-"
+				+ classInfoBean.getClass_info_idx() + "-" + classInfoBean.getClass_info_name();
+
+		Iterator<String> it = multipartRequest.getFileNames();
+
+		boolean clearAssistDataTable = false;
+
+		while (it.hasNext()) {
+
+			if(!clearAssistDataTable){
+				//assistDataService.deleteAssistDataInfo(modifyAssistContentsBean.getAssist_contents_idx());
+				//clearAssistDataTable = true;
+			}
+
+			String paramfName = it.next();
+
+			MultipartFile mFile = multipartRequest.getFile(paramfName);
+			String oName = mFile.getOriginalFilename();
+
+			AssistDataBean writeAssistDataBean = new AssistDataBean();
+			writeAssistDataBean.setAssist_data_filename(oName);
+			writeAssistDataBean.setAssist_data_file(mFile);
+			writeAssistDataBean.setAssist_data_contents_idx(modifyAssistContentsBean.getAssist_contents_idx());
+
+			assistDataService.addAssistDataInfo(writeAssistDataBean, column_name);
+			log.info("assistDatService: {}", assistDataService.toString());
+
+		}
+
+		return "class/modify";
+	}
+
 }

@@ -62,12 +62,12 @@
 					<div class="text-right">
 						<a href="${root}class/main?class_info_idx=${class_info_idx}&page=${page}&class_menu_idx=${class_menu_idx}"
 							class="btn btn-primary">학습자료 목록보기</a>
-						<c:if test="${loginStudentBean.student_idx == readAssistContentsBean.assist_contents_writer_idx}">
+<%--						<c:if test="${loginStudentBean.student_idx == readAssistContentsBean.assist_contents_writer_idx}">--%>
 							<a href="${root}class/modify?class_info_idx=${class_info_idx}&assist_contents_idx=${assist_contents_idx}&page=${page}&class_menu_idx=${class_menu_idx}"
 							class="btn btn-info">수정하기</a>
 							<a href="${root}class/delete?class_info_idx=${class_info_idx}&assist_contents_idx=${assist_contents_idx}&page=${page}&class_menu_idx=${class_menu_idx}"
 							class="btn btn-danger">삭제하기</a>
-						</c:if>
+<%--						</c:if>--%>
 					</div>
 				</div>
 			</div>

@@ -47,4 +47,9 @@ public class ClassService {
     	
     	assistContentsDAO.addAssistContentsInfo(writeAssistContentsBean);
     }
+
+    public void modifyAssistContentsInfo(AssistContentsBean modifyAssistContentsBean) {
+        assistContentsDAO.modifyAssistContentsInfo(modifyAssistContentsBean);
+    }
+
 }
