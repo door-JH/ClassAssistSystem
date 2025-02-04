@@ -36,6 +36,9 @@
                                enctype="multipart/form-data">
                         <form:hidden path="assist_contents_info_idx" />
                         <input type='hidden' name='class_menu_idx' value='${class_menu_idx}'/>
+                        <input type='hidden' name='class_info_idx' value='${class_info_idx}'/>
+                        <input type='hidden' name='assist_contents_idx' value='${assist_contents_idx}'/>
+
 
                         <div class="form-group">
                             <form:label path="assist_contents_title">제목</form:label>

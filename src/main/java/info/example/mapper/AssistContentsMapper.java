@@ -37,8 +37,8 @@ public interface AssistContentsMapper {
 			+ "assist_contents_idx = #{assist_contents_idx}")
 	AssistContentsBean getAssistContentsInfo(int assist_contents_idx);
 
-	@Update("update assist_contents_table"
-			+ "set asssit_contents_title = #{assist_contents_title}, assist_contents_text = #{assist_contents_text} "
+	@Update("update assist_contents_table "
+			+ "set assist_contents_title = #{assist_contents_title}, assist_contents_text = #{assist_contents_text} "
 			+ "where assist_contents_idx = #{assist_contents_idx}")
 	void modifyAssistContentsInfo(AssistContentsBean modifyAssistContentsBean);
 

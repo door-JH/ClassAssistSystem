@@ -259,23 +259,25 @@ public class ClassController {
 		model.addAttribute("readAssistDataList", readAssistDataList);
 
 
+
 		return "class/modify";
 	}
 
 	@PostMapping("/modify_post")
 	public String modify_post(@Valid @ModelAttribute("modifyAssistContentsBean") AssistContentsBean modifyAssistContentsBean,
 							  MultipartHttpServletRequest multipartRequest, HttpServletRequest req,
-							  @RequestParam("class_menu_idx") int class_menu_idx,
 							  BindingResult result ,Model model) {
 
 		if(result.hasErrors()) {
 			return "class/modify";
 		}
 
+		log.info("modify_post - {}", req.toString());
+
 		classService.modifyAssistContentsInfo(modifyAssistContentsBean);
 
-		model.addAttribute("class_info_idx", modifyAssistContentsBean.getAssist_contents_info_idx());
-		model.addAttribute("class_menu_idx", class_menu_idx);
+		model.addAttribute("class_info_idx", req.getParameter("class_info_idx"));
+		model.addAttribute("class_menu_idx", req.getParameter("class_menu_idx"));
 		model.addAttribute("assist_contents_idx", modifyAssistContentsBean.getAssist_contents_idx());
 
 		String classInfoName = classService.getClassInfoName(modifyAssistContentsBean.getAssist_contents_info_idx());
@@ -284,7 +286,7 @@ public class ClassController {
 		String classMenuName = classMenuService.getClassMenuName(modifyAssistContentsBean.getAssist_contents_info_idx());
 		model.addAttribute("classMenuName", classMenuName);
 
-		ClassInfoBean classInfoBean = classService.getClassInfoDetail(modifyAssistContentsBean.getAssist_contents_info_idx());
+		ClassInfoBean classInfoBean = classService.getClassInfoDetail(Integer.parseInt(req.getParameter("class_info_idx")));
 
 		String column_name = classInfoBean.getClass_info_year() + "-" + classInfoBean.getClass_info_semester() + "-"
 				+ classInfoBean.getClass_info_idx() + "-" + classInfoBean.getClass_info_name();
@@ -315,7 +317,7 @@ public class ClassController {
 
 		}
 
-		return "class/modify";
+		return "board/modify_success";
 	}
 
 }
