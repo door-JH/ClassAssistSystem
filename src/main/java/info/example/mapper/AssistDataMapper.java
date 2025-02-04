@@ -2,6 +2,7 @@ package info.example.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
@@ -29,5 +30,14 @@ public interface AssistDataMapper {
 			"where assist_data_idx = #{assist_data_idx} " +
 			"and assist_data_contents_idx = #{assist_data_contents_idx}")
 	AssistDataBean getAssistDataInfo(AssistDataBean assistDataBean);
+
+	@Delete("Delete from assist_data_table " +
+			"where assist_data_contents_idx = #{assist_contents_idx}")
+	void deleteAssistDataInfo(int assist_contents_idx);
+
+	@Select("Select count(*) " +
+			"from assist_data_table " +
+			"where assist_data_contents_idx = #{assist_contents_idx}")
+	int getAssistDataCount(int assist_contents_idx);
 
 }

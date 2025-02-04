@@ -25,4 +25,13 @@ public class AssistDataDAO {
 	public AssistDataBean getAssistDataInfo(AssistDataBean assistDataBean) {
 		return assistDataMapper.getAssistDataInfo(assistDataBean);
 	}
+
+	public void deleteAssistDataInfo(int assist_contents_idx){
+		assistDataMapper.deleteAssistDataInfo(assist_contents_idx);
+	}
+
+	public int getAssistDataCount(int assist_contents_idx){
+		return assistDataMapper.getAssistDataCount(assist_contents_idx);
+	}
+
 }

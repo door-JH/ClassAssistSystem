@@ -23,4 +23,8 @@ public class AssistContentsService {
 	public List<AssistContentsBean> getAssistContentsList(int class_info_idx){
 		return assistcontentsdao.getAssistContentsList(class_info_idx);
 	}
+
+	public void deleteAssistContentsInfo(int assist_contents_idx){
+		assistcontentsdao.deleteAssistContentsInfo(assist_contents_idx);
+	}
 }

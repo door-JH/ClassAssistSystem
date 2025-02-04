@@ -2,6 +2,7 @@ package info.example.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
@@ -41,5 +42,9 @@ public interface AssistContentsMapper {
 			+ "set assist_contents_title = #{assist_contents_title}, assist_contents_text = #{assist_contents_text} "
 			+ "where assist_contents_idx = #{assist_contents_idx}")
 	void modifyAssistContentsInfo(AssistContentsBean modifyAssistContentsBean);
+
+	@Delete("Delete from assist_contents_tale " +
+			"where assist_contents_idx = #{assist_contents_idx}")
+	void deleteAssistContentsInfo(int assist_contents_idx);
 
 }

@@ -32,4 +32,8 @@ public class AssistContentsDAO {
 	public void modifyAssistContentsInfo(AssistContentsBean modifyAssistContentsBean) {
 		assistContentsMapper.modifyAssistContentsInfo(modifyAssistContentsBean);
 	}
+
+	public void deleteAssistContentsInfo(int assist_contents_idx) {
+		assistContentsMapper.deleteAssistContentsInfo(assist_contents_idx);
+	}
 }

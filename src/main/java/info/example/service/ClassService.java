@@ -52,4 +52,8 @@ public class ClassService {
         assistContentsDAO.modifyAssistContentsInfo(modifyAssistContentsBean);
     }
 
+    public void deleteAssistContentsInfo(int assist_contents_idx) {
+        assistContentsDAO.deleteAssistContentsInfo(assist_contents_idx);
+    }
+
 }

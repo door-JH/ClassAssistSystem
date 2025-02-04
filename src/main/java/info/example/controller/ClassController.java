@@ -42,6 +42,7 @@ import javax.validation.Valid;
 public class ClassController {
 
 	private static final Logger log = LoggerFactory.getLogger(ClassController.class);
+
 	@Autowired
     private ClassService classService;
 
@@ -318,6 +319,19 @@ public class ClassController {
 		}
 
 		return "board/modify_success";
+	}
+
+	@GetMapping("/delete")
+	public String delete(@RequestParam("class_info_idx") int class_info_idx, @RequestParam("class_menu_idx") int class_menu_idx,
+						 @RequestParam("assist_contents_idx") int assist_contents_idx, Model model) {
+
+		classService.deleteAssistContentsInfo(assist_contents_idx);
+		assistDataService.deleteAssistDataInfo(assist_contents_idx);
+
+		model.addAttribute("class_info_idx", class_info_idx);
+		model.addAttribute("class_menu_idx", class_menu_idx);
+
+		return "class/delete";
 	}
 
 }

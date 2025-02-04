@@ -60,6 +60,10 @@ public class AssistDataService {
 		return file_name;
 	}
 	
-	
+	public void deleteAssistDataInfo(int assist_contents_idx) {
+		int files = assistDataDAO.getAssistDataCount(assist_contents_idx);
+		System.out.printf("%d has %d deleting files.\n", assist_contents_idx,files);
+		assistDataDAO.deleteAssistDataInfo(assist_contents_idx);
+	}
 	
 }
