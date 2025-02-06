@@ -60,7 +60,8 @@ public class ClassController {
 
     @GetMapping("/main")
     public String main(@RequestParam("class_info_idx") int class_info_idx,
-                       @RequestParam("class_menu_idx") int class_menu_idx, Model model) {
+                       @RequestParam("class_menu_idx") int class_menu_idx,
+					   @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
 
         model.addAttribute("class_info_idx", class_info_idx);
 

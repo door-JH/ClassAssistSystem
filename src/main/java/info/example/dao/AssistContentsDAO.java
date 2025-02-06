@@ -2,6 +2,7 @@ package info.example.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -21,8 +22,8 @@ public class AssistContentsDAO {
 		//}
 	}
 	
-	public List<AssistContentsBean> getAssistContentsList(int class_info_idx){
-		return assistContentsMapper.getAssistContentsList(class_info_idx);
+	public List<AssistContentsBean> getAssistContentsList(int class_info_idx, RowBounds rowBounds) {
+		return assistContentsMapper.getAssistContentsList(class_info_idx, rowBounds);
 	}
 	
 	public AssistContentsBean getAssistContentsInfo(int assist_contents_idx) {
