@@ -12,6 +12,7 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,7 +26,7 @@ public class ClassService {
     
     @Autowired
     private AssistDataDAO  assistDataDAO;
-    
+
     public String getClassInfoName(int class_info_idx){
         return classInfoDAO.getClassInfoName(class_info_idx);
     }

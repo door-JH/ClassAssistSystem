@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import info.example.beans.AssistContentsBean;
 import info.example.beans.AssistDataBean;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.session.RowBounds;
 
 public interface AssistContentsMapper {
 	
@@ -28,7 +29,7 @@ public interface AssistContentsMapper {
 			+ "where a1.assist_contents_writer_idx = a2.student_idx "
 			+ "and a1.assist_contents_info_idx = #{class_info_idx} "
 			+ "order by a1.assist_contents_idx desc")
-	List<AssistContentsBean> getAssistContentsList(int class_info_idx);
+	List<AssistContentsBean> getAssistContentsList(int class_info_idx, RowBounds rowBounds);
 	
 	@Select("Select "
 			+ "a2.student_name as assist_contents_writer_name, a1.assist_contents_date, "
@@ -46,5 +47,10 @@ public interface AssistContentsMapper {
 	@Delete("Delete from assist_contents_tale " +
 			"where assist_contents_idx = #{assist_contents_idx}")
 	void deleteAssistContentsInfo(int assist_contents_idx);
+
+	@Select("select count(*) " +
+			"from assist_contents_table " +
+			"where assist_contents_idx = #{assist_contents_idx}")
+	int getAssistContentsCnt(int assist_contents_idx);
 
 }

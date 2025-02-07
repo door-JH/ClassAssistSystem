@@ -64,8 +64,58 @@ text-align: center; margin-top:100px;margin-bottom:25px; ">
                 	</c:forEach>
                 	<tr><td></td><td></td><td></td><td></td></tr>
                 </tbody>
-                
             </table>
+
+            <div class ="d-none d-md-block">
+                <ul class="pagination justify-content-center">
+                    <c:choose>
+                        <c:when test="${pageBean.prevPage <= 0}">
+                            <li class="page-item disabled">
+                                <a href="#" class="page-link">이전</a>
+                            </li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item">
+                                <a href="${root}class/main?class_info_idx=${class_info_idx}&class_menu_idx=${class_menu_idx}&page=${pageBean.prevPage}"
+                                   class="page-link">이전</a>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
+                    <c:forEach var="idx" begin="${pageBean.min}" end="${pageBean.max}">
+                        <c:choose>
+                            <c:when test="${idx == pageBean.currentPage}">
+                                <li class = "page-item active">
+                                    <a href="${root}class/main?class_info_idx=${class_info_idx}&class_menu_idx=${class_menu_idx}&page=${idx}"
+                                       class="page-link">${idx}</a>
+                                </li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="page-item">
+                                    <a href="${root}class/main?class_info_idx=${class_info_idx}&class_menu_idx=${class_menu_idx}&page=${idx}"
+                                       class="page-link">${idx}</a>
+                                </li>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+
+                    <c:choose>
+                        <c:when test="${pageBean.max >= pageBean.pageCnt}">
+                            <li class="page-item disabled">
+                                <a href="#" class="page-link">다음</a>
+                            </li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item">
+                                <a href="${root}class/main?class_info=${class_info_idx}&class_menu_idx=${class_menu_idx}&page=${pageBean.nextPage}"
+                                   class="page-link"> 다음 </a>
+                            </li>
+                        </c:otherwise>
+                    </c:choose>
+                </ul>
+
+
+            </div>
+
 <%--            <c:if test="${loginStudentBean.student_idx == 1 }">--%>
                 <div class="text-right">
                     <a href="${root}class/write?class_info_idx=${class_info_idx}&class_menu_idx=${class_menu_idx}"

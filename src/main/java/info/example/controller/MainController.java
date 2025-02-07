@@ -13,10 +13,12 @@ public class MainController {
     @GetMapping("/main")
     public String main(){
 
-        log.info("MainControllerasdasdas");
-
         return "main";
     }
 
+    @GetMapping("/")
+    public String intro(){
+        return "redirect:/main";
+    }
 
 }

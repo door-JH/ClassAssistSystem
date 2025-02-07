@@ -26,7 +26,7 @@
 					<img src="image/subject/${obj.class_info_idx}.jpg" style="width: 50%">
 				</a>
 				<br/>
-				<a href="${root}/class/main?class_info_idx=${obj.class_info_idx}"
+				<a href="${root}/class/main?class_info_idx=${obj.class_info_idx}&class_menu_idx=1"
 				   		style="text-align: center; line-height: 1.8;">
 					${obj.class_info_name}
 				</a>
