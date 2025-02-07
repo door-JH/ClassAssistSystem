@@ -37,4 +37,8 @@ public class AssistContentsDAO {
 	public void deleteAssistContentsInfo(int assist_contents_idx) {
 		assistContentsMapper.deleteAssistContentsInfo(assist_contents_idx);
 	}
+
+	public int getAssistContentsCnt(int assist_contents_idx){
+		return assistContentsMapper.getAssistContentsCnt(assist_contents_idx);
+	}
 }

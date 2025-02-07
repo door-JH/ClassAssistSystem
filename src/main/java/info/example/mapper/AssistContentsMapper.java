@@ -48,4 +48,9 @@ public interface AssistContentsMapper {
 			"where assist_contents_idx = #{assist_contents_idx}")
 	void deleteAssistContentsInfo(int assist_contents_idx);
 
+	@Select("select count(*) " +
+			"from assist_contents_table " +
+			"where assist_contents_idx = #{assist_contents_idx}")
+	int getAssistContentsCnt(int assist_contents_idx);
+
 }

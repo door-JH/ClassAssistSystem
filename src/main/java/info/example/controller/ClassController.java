@@ -1,10 +1,6 @@
 package info.example.controller;
 
-import info.example.beans.AssistContentsBean;
-import info.example.beans.AssistDataBean;
-import info.example.beans.ClassInfoBean;
-import info.example.beans.ClassMenuBean;
-import info.example.beans.StudentBean;
+import info.example.beans.*;
 import info.example.service.AssistContentsService;
 import info.example.service.AssistDataService;
 import info.example.service.ClassMenuService;
@@ -76,9 +72,12 @@ public class ClassController {
         List<ClassMenuBean> classMenuList = classMenuService.getClassMenuList();
         model.addAttribute("classMenuList", classMenuList);
         
-        List<AssistContentsBean> assistContentsList = assistcontentsservice.getAssistContentsList(class_info_idx);
+        List<AssistContentsBean> assistContentsList = assistcontentsservice.getAssistContentsList(class_info_idx, page);
         model.addAttribute("assistContentsList", assistContentsList);
-        
+
+		PageBean pageBean = assistcontentsservice.getAssistContentsCnt(class_info_idx, page);
+		model.addAttribute("pageBean", pageBean);
+
         return "class/main";
     }
     
