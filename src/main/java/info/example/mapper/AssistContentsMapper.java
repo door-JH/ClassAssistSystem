@@ -44,7 +44,7 @@ public interface AssistContentsMapper {
 			+ "where assist_contents_idx = #{assist_contents_idx}")
 	void modifyAssistContentsInfo(AssistContentsBean modifyAssistContentsBean);
 
-	@Delete("Delete from assist_contents_tale " +
+	@Delete("Delete from assist_contents_table " +
 			"where assist_contents_idx = #{assist_contents_idx}")
 	void deleteAssistContentsInfo(int assist_contents_idx);
 

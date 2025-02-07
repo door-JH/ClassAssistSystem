@@ -331,7 +331,7 @@ public class ClassController {
 		model.addAttribute("class_info_idx", class_info_idx);
 		model.addAttribute("class_menu_idx", class_menu_idx);
 
-		return "class/delete";
+		return "board/delete_success";
 	}
 
 }
