@@ -9,7 +9,7 @@
 <script>
 	var cnt=1;
 	function add_file(){
-		$("#d_file").append("<br>"+"<input type='file' name='upload_file" + cnt + "'/>");
+		$("#a_file").append("<br>"+"<input type='file' name='upload_file" + cnt + "'/>");
 		cnt++;
 	}
 </script>
@@ -53,7 +53,7 @@
 							<div class="form-group-append">
 								<button type ="button" class="btn btn-light" onclick='add_file()'>첨부파일 추가 </button>
 							</div>
-							<div id="d_file"></div>
+							<div id="a_file"></div>
 						</div>
 						<div class="form-group">
 							<div class="text-right">

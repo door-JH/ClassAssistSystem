@@ -7,11 +7,19 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 <script>
-    var cnt=1;
+
+
     function add_file(){
-        $("#d_file").append("<br>"+"<input type='file' name='upload_file" + cnt + "'/>");
-        cnt++;
+        // $("#_file").append("<br>"+"<input type='file' name='upload_file" + cnt + "'/>");
+        $("#_file").append("<br>"+"<input type='file' name='upload_file'/>");
     }
+
+    function del_file() {
+        $("#_file").remove();
+        $("#_file").append("<br>"+"<input type='file' name='upload_file'/>");
+    }
+
+
 </script>
 <html>
 <head>
@@ -53,10 +61,23 @@
                         </div>
 
                         <div class="form-group">
-                            <div class="form-group-append">
-                                <button type ="button" class="btn btn-light" onclick='add_file()'>첨부파일 추가 </button>
-                            </div>
-                            <div id="d_file"></div>
+                            <c:choose>
+                                <c:when test="${readAssistDataList == null}">
+                                    <div class="form-group-append" id="_file">
+                                        <button type ="button" class="btn btn-light"
+                                                onclick='add_file()'>첨부파일 추가 </button>
+                                    </div>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:forEach var='obj' items="${readAssistDataList}">
+                                        <div class="form-group" id="_file">
+                                            ${obj.assist_data_filename} &nbsp;
+                                            <span style="color: #FF0000" onclick="del_file()">X</span>
+                                        </div>
+                                    </c:forEach>
+                                </c:otherwise>
+                            </c:choose>
+                            <div id ="_file"></div>
                         </div>
                         <div class="form-group">
                             <div class="text-right">
