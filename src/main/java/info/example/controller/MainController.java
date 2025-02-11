@@ -13,6 +13,8 @@ public class MainController {
     @GetMapping("/main")
     public String main(){
 
+        log.info("sadf");
+
         return "main";
     }
 

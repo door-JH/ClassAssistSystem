@@ -31,7 +31,7 @@ import java.util.List;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+
 
 @Controller
 @RequestMapping("/class")
@@ -131,24 +131,27 @@ public class ClassController {
     }
     
     @PostMapping("/write_post")
-    public String write_post(@Valid @ModelAttribute("writeAssistContentsBean") AssistContentsBean writeAssistContentsBean,
-    							MultipartHttpServletRequest multipartRequest, HttpServletRequest request,
-    							@RequestParam("class_menu_idx") int class_menu_idx, BindingResult result, Model model) {
+    public String write_post(@ModelAttribute("writeAssistContentsBean") AssistContentsBean writeAssistContentsBean,
+							 MultipartHttpServletRequest multipartRequest,
+							 HttpServletRequest req, BindingResult result, Model model) {
     	
     	if(result.hasErrors()) {
     		return "class/write";
     	}
-    	
+
+
+
+
     	String classInfoName = classService.getClassInfoName(writeAssistContentsBean.getAssist_contents_idx());
     	model.addAttribute("classInfoName", classInfoName);
     	
-    	String classMenuName = classMenuService.getClassMenuName(class_menu_idx);
+    	String classMenuName = classMenuService.getClassMenuName(Integer.parseInt(req.getParameter("class_menu_idx")));
     	model.addAttribute("classMenuName", classMenuName);
     	
     	assistcontentsservice.addAssistContentsInfo(writeAssistContentsBean);
     	
     	model.addAttribute("class_info_idx", writeAssistContentsBean.getAssist_contents_info_idx());
-    	model.addAttribute("class_menu_idx", class_menu_idx);
+    	model.addAttribute("class_menu_idx", Integer.parseInt(req.getParameter("class_menu_idx")));
     	model.addAttribute("assist_contents_idx", writeAssistContentsBean.getAssist_contents_idx());
     	
     	
@@ -256,7 +259,7 @@ public class ClassController {
 		modifyAssistContentsBean.setAssist_contents_info_idx(tempAssistContentsBean.getAssist_contents_info_idx());
 		modifyAssistContentsBean.setAssist_contents_idx(tempAssistContentsBean.getAssist_contents_idx());
 
-		List<AssistDataBean> readAssistDataList = classService.getAssistDataList(class_info_idx);
+		List<AssistDataBean> readAssistDataList = classService.getAssistDataList(assist_contents_idx);
 		model.addAttribute("readAssistDataList", readAssistDataList);
 
 
@@ -265,7 +268,7 @@ public class ClassController {
 	}
 
 	@PostMapping("/modify_post")
-	public String modify_post(@Valid @ModelAttribute("modifyAssistContentsBean") AssistContentsBean modifyAssistContentsBean,
+	public String modify_post( @ModelAttribute("modifyAssistContentsBean") AssistContentsBean modifyAssistContentsBean,
 							  MultipartHttpServletRequest multipartRequest, HttpServletRequest req,
 							  BindingResult result ,Model model) {
 
@@ -275,6 +278,7 @@ public class ClassController {
 
 		log.info("modify_post - {}", req.toString());
 
+		//게시글 내용 변경 - 제목, 내용
 		classService.modifyAssistContentsInfo(modifyAssistContentsBean);
 
 		model.addAttribute("class_info_idx", req.getParameter("class_info_idx"));
@@ -287,6 +291,7 @@ public class ClassController {
 		String classMenuName = classMenuService.getClassMenuName(modifyAssistContentsBean.getAssist_contents_info_idx());
 		model.addAttribute("classMenuName", classMenuName);
 
+
 		ClassInfoBean classInfoBean = classService.getClassInfoDetail(Integer.parseInt(req.getParameter("class_info_idx")));
 
 		String column_name = classInfoBean.getClass_info_year() + "-" + classInfoBean.getClass_info_semester() + "-"
@@ -296,26 +301,33 @@ public class ClassController {
 
 		boolean clearAssistDataTable = false;
 
+		//첨부파일이 있다면
 		while (it.hasNext()) {
-
-			if(!clearAssistDataTable){
-				//assistDataService.deleteAssistDataInfo(modifyAssistContentsBean.getAssist_contents_idx());
-				//clearAssistDataTable = true;
-			}
 
 			String paramfName = it.next();
 
 			MultipartFile mFile = multipartRequest.getFile(paramfName);
 			String oName = mFile.getOriginalFilename();
 
-			AssistDataBean writeAssistDataBean = new AssistDataBean();
-			writeAssistDataBean.setAssist_data_filename(oName);
-			writeAssistDataBean.setAssist_data_file(mFile);
-			writeAssistDataBean.setAssist_data_contents_idx(modifyAssistContentsBean.getAssist_contents_idx());
+			//첨부파일이 없을때
+			if(oName.isBlank()){
+				//기존 데이터 삭제
+				assistDataService.deleteAssistDataInfo(modifyAssistContentsBean.getAssist_contents_idx());
+			}
 
-			assistDataService.addAssistDataInfo(writeAssistDataBean, column_name);
-			log.info("assistDatService: {}", assistDataService.toString());
 
+			//첨부파일이 새로 업데이트 됐을때
+			if(!oName.isBlank() && oName != req.getParameter("origin_file_name")){
+				// 기존 파일 제거 후 새로 등록
+				assistDataService.deleteAssistDataInfo(modifyAssistContentsBean.getAssist_contents_idx());
+
+				AssistDataBean writeAssistDataBean = new AssistDataBean();
+				writeAssistDataBean.setAssist_data_filename(oName);
+				writeAssistDataBean.setAssist_data_file(mFile);
+				writeAssistDataBean.setAssist_data_contents_idx(modifyAssistContentsBean.getAssist_contents_idx());
+
+				assistDataService.addAssistDataInfo(writeAssistDataBean, column_name);
+			}
 		}
 
 		return "board/modify_success";

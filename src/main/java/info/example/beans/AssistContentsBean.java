@@ -1,15 +1,15 @@
 package info.example.beans;
 
-import javax.validation.constraints.NotBlank;
+//
+
+
 
 public class AssistContentsBean {
 	
 	private int assist_contents_idx;
 	
-	@NotBlank
 	private String assist_contents_title;
-	
-	@NotBlank
+
 	private String assist_contents_text;
 	
 	private int assist_contents_writer_idx;
